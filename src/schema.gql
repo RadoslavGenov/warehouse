@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  isHazardous: Boolean!
+  warehouse: Warehouse!
+}
+
+type Warehouse {
+  id: ID!
+  size: String!
+  customer: Customer!
+  products: [Product!]!
+}
+
+type Customer {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  warehouses: [Warehouse!]!
+}
+
+type Query {
+  products: [Product!]!
+}
+
+type Mutation {
+  createProduct(product: CreateProductInput!): Product!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  isHazardous: Boolean!
+}
