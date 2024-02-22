@@ -5,16 +5,18 @@ import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
 import { CreateProductInput } from './dto/create-product.input';
 import { Import } from './entities/import.entity';
+import { HistoryService } from '../history/history.service';
 
 @Injectable()
 export class ProductService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+    private readonly historyService: HistoryService,
   ) {}
 
   async createProduct(product: CreateProductInput): Promise<Product> {
-    const newProduct = { ...new Product(), ...product };
+    const newProduct: Product = { ...new Product(), ...product };
 
     return await this.productRepository.save(newProduct);
   }
@@ -49,6 +51,8 @@ export class ProductService {
       amount: product.amount - amount,
     };
 
+    await this.historyService.createRecord(amount, new Date());
+
     return await this.productRepository.save(newProduct);
   }
 
@@ -69,6 +73,8 @@ export class ProductService {
     } else {
       product.amount += amount;
     }
+
+    await this.historyService.createRecord(amount, date);
 
     return await this.productRepository.save(product);
   }

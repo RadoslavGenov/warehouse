@@ -1,9 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class History {
@@ -11,8 +6,8 @@ export class History {
   id: number;
 
   @Column()
-  record: string;
+  record: number;
 
-  @CreateDateColumn({ update: false })
-  createdAt: Date;
+  @Column()
+  date: Date;
 }
