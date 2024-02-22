@@ -2,17 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Import {
+  id: ID!
+  amount: Float!
+  date: DateTime!
+  product: Product!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Product {
   id: ID!
   name: String!
   description: String!
+  amount: Float!
   isHazardous: Boolean!
+  imports: [Import!]!
   warehouse: Warehouse!
 }
 
 type Warehouse {
   id: ID!
   size: String!
+  isHazardous: Boolean!
   customer: Customer!
   products: [Product!]!
 }
@@ -26,14 +41,18 @@ type Customer {
 
 type Query {
   products: [Product!]!
+  currentStock(id: Int!): Int!
 }
 
 type Mutation {
   createProduct(product: CreateProductInput!): Product!
+  recordExport(id: Int!, amount: Int!): Product!
+  recordImport(id: Int!, amount: Int!, date: DateTime!): Product!
 }
 
 input CreateProductInput {
   name: String!
   description: String!
   isHazardous: Boolean!
+  amount: Float!
 }

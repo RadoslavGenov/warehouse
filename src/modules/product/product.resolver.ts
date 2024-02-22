@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Product } from './entities/product.entity';
 import { ProductService } from './product.service';
 import { CreateProductInput } from './dto/create-product.input';
@@ -12,8 +12,30 @@ export class ProductResolver {
     return this.productService.createProduct(createProductInput);
   }
 
-  @Query(() => [Product])
+  @Mutation(() => Product)
+  recordExport(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('amount', { type: () => Int }) amount: number,
+  ) {
+    return this.productService.recordExport(id, amount);
+  }
+
+  @Mutation(() => Product)
+  recordImport(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('amount', { type: () => Int }) amount: number,
+    @Args('date') date: Date,
+  ) {
+    return this.productService.recordImport(id, amount, date);
+  }
+
+  @Query(() => [Product], { name: 'products' })
   products() {
     return this.productService.getProducts();
+  }
+
+  @Query(() => Int, { name: 'currentStock' })
+  currentStock(@Args('id', { type: () => Int }) id: number) {
+    return this.productService.getCurrentStock(id);
   }
 }

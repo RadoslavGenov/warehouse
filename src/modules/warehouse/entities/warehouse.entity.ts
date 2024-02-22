@@ -20,6 +20,10 @@ export class Warehouse {
   @Field()
   size: string;
 
+  @Column()
+  @Field()
+  isHazardous: boolean;
+
   @ManyToOne(() => Customer, (customer) => customer.warehouses)
   @Field(() => Customer)
   customer: Customer;

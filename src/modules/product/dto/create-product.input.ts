@@ -6,14 +6,18 @@ export class CreateProductInput {
   @IsNotEmpty()
   @Field()
   @MinLength(2, { message: 'Name must have atleast 2 characters.' })
-  readonly name: string;
+  name: string;
 
   @IsNotEmpty()
   @Field()
   @MinLength(2, { message: 'Name must have atleast 2 characters.' })
-  readonly description: string;
+  description: string;
 
   @IsNotEmpty()
   @Field()
-  readonly isHazardous: boolean;
+  isHazardous: boolean;
+
+  @IsNotEmpty()
+  @Field()
+  amount: number;
 }
