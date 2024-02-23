@@ -16,7 +16,7 @@ export class WarehouseRelationToCustomer1708538513638
         `);
     await queryRunner.query(`
             ALTER TABLE "warehouse"
-            ADD CONSTRAINT "FK_b63c771a9b6b178fd3afb9d1d1f" FOREIGN KEY ("customerId") REFERENCES "customer"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+            ADD CONSTRAINT "FK_b63c771a9b6b178fd3afb9d1d1f" FOREIGN KEY ("customerId") REFERENCES "customer"("id") ON DELETE NO ACTION ON UPDATE CASCADE
         `);
   }
 

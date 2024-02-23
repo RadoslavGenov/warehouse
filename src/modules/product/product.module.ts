@@ -8,5 +8,6 @@ import { HistoryModule } from '../history/history.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Product]), HistoryModule],
   providers: [ProductService, ProductResolver],
+  exports: [ProductService],
 })
 export class ProductModule {}

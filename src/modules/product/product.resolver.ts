@@ -34,8 +34,8 @@ export class ProductResolver {
     return this.productService.getProducts();
   }
 
-  @Query(() => Int, { name: 'currentStock' })
-  currentStock(@Args('id', { type: () => Int }) id: number) {
-    return this.productService.getCurrentStock(id);
+  @Query(() => Product, { name: 'product' })
+  product(@Args('id', { type: () => Int }) id: number) {
+    return this.productService.getProduct(id);
   }
 }

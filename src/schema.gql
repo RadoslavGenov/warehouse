@@ -26,7 +26,8 @@ type Product {
 
 type Warehouse {
   id: ID!
-  size: String!
+  size: Float!
+  remainingSpace: Float!
   isHazardous: Boolean!
   customer: Customer!
   products: [Product!]!
@@ -40,14 +41,24 @@ type Customer {
 }
 
 type Query {
+  warehouses: [Warehouse!]!
+  warehouse(id: Int!): Warehouse!
   products: [Product!]!
-  currentStock(id: Int!): Int!
+  product(id: Int!): Product!
 }
 
 type Mutation {
+  createWarehouse(warehouse: CreateWarehouseInput!): Warehouse!
+  addProduct(warehouseId: Int!, productId: Int!): Warehouse!
+  removeProduct(warehouseId: Int!, productId: Int!): Warehouse!
   createProduct(product: CreateProductInput!): Product!
   recordExport(id: Int!, amount: Int!): Product!
   recordImport(id: Int!, amount: Int!, date: DateTime!): Product!
+}
+
+input CreateWarehouseInput {
+  size: Float!
+  isHazardous: Boolean!
 }
 
 input CreateProductInput {

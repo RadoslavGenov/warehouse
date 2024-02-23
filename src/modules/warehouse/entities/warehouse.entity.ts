@@ -18,7 +18,11 @@ export class Warehouse {
 
   @Column()
   @Field()
-  size: string;
+  size: number;
+
+  @Field()
+  @Column()
+  remainingSpace: number;
 
   @Column()
   @Field()
@@ -28,7 +32,7 @@ export class Warehouse {
   @Field(() => Customer)
   customer: Customer;
 
-  @OneToMany(() => Product, (product) => product.warehouse)
+  @OneToMany(() => Product, (product) => product.warehouse, { cascade: true })
   @Field(() => [Product])
   products: Product[];
 }

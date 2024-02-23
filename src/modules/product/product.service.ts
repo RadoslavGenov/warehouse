@@ -21,20 +21,20 @@ export class ProductService {
     return await this.productRepository.save(newProduct);
   }
 
+  async getProduct(id: number): Promise<Product> {
+    const product = await this.productRepository.findOneOrFail({
+      where: { id },
+    });
+
+    return product;
+  }
+
   async getProducts(): Promise<Product[]> {
     const products = await this.productRepository.find({
       relations: ['imports'],
     });
 
     return products;
-  }
-
-  async getCurrentStock(id: number): Promise<number> {
-    const product = await this.productRepository.findOneOrFail({
-      where: { id },
-    });
-
-    return product.amount;
   }
 
   async recordExport(id: number, amount: number): Promise<Product> {
