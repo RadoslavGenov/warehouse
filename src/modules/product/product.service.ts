@@ -62,10 +62,6 @@ export class ProductService {
       where: { id },
     });
 
-    if (product.amount < amount) {
-      throw new Error(`Insufficient stock amount for product: ${id}`);
-    }
-
     const currentDate = new Date();
 
     if (currentDate < date) {
@@ -85,7 +81,7 @@ export class ProductService {
       .createQueryBuilder('product')
       .innerJoinAndSelect('product.imports', 'imports')
       .groupBy('product.id, imports.id')
-      .having('COUNT(product.id) > 0')
+      .having('COUNT(imports.id) > 0')
       .getMany();
 
     const currentDate = new Date();
