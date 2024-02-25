@@ -39,6 +39,6 @@ export class Product {
   imports: Import[];
 
   @ManyToOne(() => Warehouse, (warehouse) => warehouse.products)
-  @Field(() => Warehouse)
+  @Field(() => Warehouse, { nullable: true })
   warehouse: Warehouse;
 }

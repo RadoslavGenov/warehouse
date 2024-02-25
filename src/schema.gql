@@ -21,7 +21,7 @@ type Product {
   amount: Float!
   isHazardous: Boolean!
   imports: [Import!]!
-  warehouse: Warehouse!
+  warehouse: Warehouse
 }
 
 type Warehouse {
@@ -30,7 +30,7 @@ type Warehouse {
   remainingSpace: Float!
   isHazardous: Boolean!
   customer: Customer!
-  products: [Product!]!
+  products: [Product!]
 }
 
 type Customer {
@@ -40,20 +40,28 @@ type Customer {
   warehouses: [Warehouse!]!
 }
 
+type History {
+  id: Float!
+  amount: Float!
+  type: Float!
+  date: DateTime!
+}
+
 type Query {
   warehouses: [Warehouse!]!
-  warehouse(id: Int!): Warehouse!
+  warehouse(id: ID!): Warehouse!
   products: [Product!]!
-  product(id: Int!): Product!
+  product(id: ID!): Product!
+  history: [History!]!
 }
 
 type Mutation {
   createWarehouse(warehouse: CreateWarehouseInput!): Warehouse!
-  addProduct(warehouseId: Int!, productId: Int!): Warehouse!
-  removeProduct(warehouseId: Int!, productId: Int!): Warehouse!
+  addProduct(warehouseId: ID!, productId: ID!): Warehouse!
+  removeProduct(warehouseId: ID!, productId: ID!): Warehouse!
   createProduct(product: CreateProductInput!): Product!
-  recordExport(id: Int!, amount: Int!): Product!
-  recordImport(id: Int!, amount: Int!, date: DateTime!): Product!
+  recordExport(id: ID!, amount: Int!): Product!
+  recordImport(id: ID!, amount: Int!, date: DateTime!): Product!
 }
 
 input CreateWarehouseInput {
