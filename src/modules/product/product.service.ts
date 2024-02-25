@@ -19,6 +19,10 @@ export class ProductService {
   async createProduct(product: CreateProductInput): Promise<Product> {
     const newProduct: Product = { ...new Product(), ...product };
 
+    if (product.amount <= 0) {
+      throw new Error('Product amount has to be at least 1');
+    }
+
     return await this.productRepository.save(newProduct);
   }
 
@@ -52,11 +56,12 @@ export class ProductService {
       amount: product.amount - amount,
     };
 
-    await this.historyService.createRecord(
+    await this.historyService.createRecord({
       amount,
-      new Date(),
-      RecordType.Export,
-    );
+      date: new Date(),
+      type: RecordType.Export,
+      productName: product.name,
+    });
 
     return await this.productRepository.save(newProduct);
   }
@@ -79,7 +84,12 @@ export class ProductService {
       product.amount += amount;
     }
 
-    await this.historyService.createRecord(amount, date, RecordType.Import);
+    await this.historyService.createRecord({
+      productName: product.name,
+      amount,
+      date,
+      type: RecordType.Import,
+    });
 
     return await this.productRepository.save(product);
   }
