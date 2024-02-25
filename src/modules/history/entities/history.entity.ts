@@ -11,6 +11,10 @@ export class History {
 
   @Column()
   @Field()
+  productName: string;
+
+  @Column()
+  @Field()
   amount: number;
 
   @Column()

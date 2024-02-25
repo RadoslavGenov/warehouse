@@ -42,6 +42,7 @@ type Customer {
 
 type History {
   id: Float!
+  productName: String!
   amount: Float!
   type: Float!
   date: DateTime!
