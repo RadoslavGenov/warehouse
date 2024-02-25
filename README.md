@@ -95,6 +95,7 @@ Decided to go with a modular approach, for better separation of concerns.
 │   │       └── warehouse.service.ts
 │   └── schema.gql
 ├── test
+|   ├── types.ts
 │   └── jest-e2e.json
 ├── tsconfig.build.json
 └── tsconfig.json
