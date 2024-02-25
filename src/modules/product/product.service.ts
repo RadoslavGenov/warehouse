@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { CreateProductInput } from './dto/create-product.input';
 import { Import } from './entities/import.entity';
 import { HistoryService } from '../history/history.service';
+import { RecordType } from '../history/entities/record-type.enum';
 
 @Injectable()
 export class ProductService {
@@ -31,7 +32,7 @@ export class ProductService {
 
   async getProducts(): Promise<Product[]> {
     const products = await this.productRepository.find({
-      relations: ['imports'],
+      relations: ['imports', 'warehouse'],
     });
 
     return products;
@@ -51,7 +52,11 @@ export class ProductService {
       amount: product.amount - amount,
     };
 
-    await this.historyService.createRecord(amount, new Date());
+    await this.historyService.createRecord(
+      amount,
+      new Date(),
+      RecordType.Export,
+    );
 
     return await this.productRepository.save(newProduct);
   }
@@ -64,13 +69,17 @@ export class ProductService {
 
     const currentDate = new Date();
 
+    if (amount <= 0) {
+      throw new Error('Import amount has to be at least 1');
+    }
+
     if (currentDate < date) {
       product.imports.push({ ...new Import(), amount, date });
     } else {
       product.amount += amount;
     }
 
-    await this.historyService.createRecord(amount, date);
+    await this.historyService.createRecord(amount, date, RecordType.Import);
 
     return await this.productRepository.save(product);
   }
