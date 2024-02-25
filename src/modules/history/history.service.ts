@@ -17,7 +17,9 @@ export class HistoryService {
   }
 
   async getHistory(): Promise<History[]> {
-    const history = await this.historyRepository.find();
+    const history = await this.historyRepository.find({
+      order: { date: 'DESC' },
+    });
 
     return history;
   }
