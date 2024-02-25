@@ -51,21 +51,21 @@ export class WarehouseService {
   }
 
   async removeProduct(warehouseId: number, productId: number) {
-    const warehouse = await this.warehouseRepository.findOneOrFail({
-      relations: ['products'],
-      where: { id: warehouseId },
-    });
+    const warehouse = await this.warehouseRepository
+      .createQueryBuilder('warehouse')
+      .innerJoinAndSelect(
+        'warehouse.products',
+        'products',
+        `products.id = ${productId}`,
+      )
+      .getOne();
 
-    const product = warehouse.products.find(
-      (product) => product.id === productId,
-    );
-
-    if (!product) {
+    if (!warehouse) {
       throw new Error(`No such product in warehouse: ${warehouseId}`);
     }
 
     warehouse.products = warehouse.products.filter(
-      (product) => product.id !== productId,
+      (product) => product.id !== parseInt(`${productId}`, 10),
     );
 
     warehouse.remainingSpace += 1;
