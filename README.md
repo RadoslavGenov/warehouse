@@ -2,13 +2,12 @@
 
 Server side Warehouse application, which uses technologies:
 
-# Nest JS
-# Graphql
-# Typeorm
-# PostgreSQL
-# Jest
-# Typescript
-
+`Nest JS`
+`Graphql`
+`Typeorm`
+`PostgreSQL`
+`Jest`
+`Typescript`
 
 ## Prerequisites
 
