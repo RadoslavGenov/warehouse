@@ -39,7 +39,7 @@ export class WarehouseService {
 
     if (product.isHazardous !== warehouse.isHazardous) {
       throw new Error(
-        `Product: ${product.id} cannot be kept in warehouse: ${warehouseId}`,
+        `Product: ${product.name} cannot be kept in warehouse: ${warehouseId}`,
       );
     }
 
