@@ -74,7 +74,9 @@ export class WarehouseService {
   }
 
   async getWarehouses(): Promise<Warehouse[]> {
-    const warehouses = await this.warehouseRepository.find();
+    const warehouses = await this.warehouseRepository.find({
+      relations: ['products'],
+    });
 
     return warehouses;
   }

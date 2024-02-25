@@ -33,6 +33,6 @@ export class Warehouse {
   customer: Customer;
 
   @OneToMany(() => Product, (product) => product.warehouse, { cascade: true })
-  @Field(() => [Product])
+  @Field(() => [Product], { nullable: true })
   products: Product[];
 }
