@@ -1,6 +1,14 @@
 ## Description
 
-Warehouse application backend
+Server side Warehouse application, which uses technologies:
+
+# Nest JS
+# Graphql
+# Typeorm
+# PostgreSQL
+# Jest
+# Typescript
+
 
 ## Prerequisites
 
