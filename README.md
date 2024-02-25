@@ -45,7 +45,7 @@ npm run migrate
 
 ## App structure is as follows
 
-Decided to go with a modular approach, for better separation of concerns.
+Decided to use a modular approach, for better separation of concerns.
 
 ```
 ├── README.md
