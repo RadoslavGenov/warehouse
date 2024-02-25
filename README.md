@@ -72,9 +72,7 @@ Decided to go with a modular approach, for better separation of concerns.
 │   │   │   │   ├── history.entity.ts
 │   │   │   │   └── record-type.enum.ts
 │   │   │   ├── history.module.ts
-│   │   │   ├── history.resolver.spec.ts
 │   │   │   ├── history.resolver.ts
-│   │   │   ├── history.service.spec.ts
 │   │   │   └── history.service.ts
 │   │   ├── product
 │   │   │   ├── dto
@@ -82,9 +80,7 @@ Decided to go with a modular approach, for better separation of concerns.
 │   │   │   ├── entities
 │   │   │   │   ├── import.entity.ts
 │   │   │   │   └── product.entity.ts
-│   │   │   ├── product.controller.spec.ts
 │   │   │   ├── product.module.ts
-│   │   │   ├── product.resolver.spec.ts
 │   │   │   ├── product.resolver.ts
 │   │   │   ├── product.service.spec.ts
 │   │   │   └── product.service.ts
@@ -94,7 +90,6 @@ Decided to go with a modular approach, for better separation of concerns.
 │   │       ├── entities
 │   │       │   └── warehouse.entity.ts
 │   │       ├── warehouse.module.ts
-│   │       ├── warehouse.resolver.spec.ts
 │   │       ├── warehouse.resolver.ts
 │   │       ├── warehouse.service.spec.ts
 │   │       └── warehouse.service.ts
